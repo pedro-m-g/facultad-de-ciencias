@@ -1,3 +1,10 @@
 # Facultad de Ciencias
 
-Este proyecto encapsula tanto el backend como la aplicación del sistema para la Facultad de Ciencias de UABC.
+## Overview (EN)
+This repository contains both the backend and client application for the Facultad de Ciencias (UABC) information system.
+
+## Installation
+TBD
+
+## Contributing
+TBD
