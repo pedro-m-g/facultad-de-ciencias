@@ -52,7 +52,7 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
-        DB::transaction(function () use ($user) {
+        DB::transaction(function () use ($user, $request) {
             $user->delete();
             Auth::logout();
             $request->session()->invalidate();
