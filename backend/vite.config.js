@@ -14,9 +14,32 @@ export default defineConfig({
     }),
     react(),
   ],
-  server: {
-    port: Number(process.env.VITE_PORT) || 5173,
-  },
+// backend/vite.config.js
+
+-import { defineConfig } from 'vite';
++import { defineConfig, loadEnv } from 'vite';
+
+-export default defineConfig({
++export default defineConfig(({ mode }) => {
++  // Load `.env`, `.env.[mode]`, etc. into process.env
++  const env = loadEnv(mode, process.cwd(), '');
++
++  // Prefer .env values, fall back to any already-exported shell vars, then default
++  const port = Number(env.VITE_PORT ?? process.env.VITE_PORT) || 5173;
++
++  return {
+     plugins: [
+       // …
+     ],
+-  server: {
+-    port: Number(process.env.VITE_PORT) || 5173,
+-  },
++    server: {
++      port,
++    },
+   };
+-});
++});
   resolve: {
     alias: {
       '@': resolve(__dirname, 'resources/js'),
