@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCoachRequest;
 use App\Models\Coach;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -15,6 +14,8 @@ class CoachController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Coach::class);
+
         $coaches = Coach::paginate();
         return Inertia::render('Coaches/Index', [
             'coaches' => $coaches
@@ -34,8 +35,16 @@ class CoachController extends Controller
      */
     public function store(StoreCoachRequest $request)
     {
+        $this->authorize('create', Coach::class);
         $coachData = $request->validated();
-        Coach::create($coachData);
+
+        try {
+            Coach::create($coachData);
+            return Redirect::route('coaches.index')->with('success', 'Coach created successfully.');
+        } catch (\Exception $e) {
+            return Redirect::back()->withErrors(['error' => 'Failed to create coach.']);
+        }
+
         return Redirect::route('coaches.index');
     }
 
@@ -66,11 +75,16 @@ class CoachController extends Controller
      */
     public function update(StoreCoachRequest $request, string $id)
     {
-        $coachData = $request->validated();
         $coach = Coach::findOrFail($id);
-        $coach->fill($coachData);
-        $coach->save();
-        return Redirect::route('coaches.index');
+        $this->authorize('update', $coach);
+        $coachData = $request->validated();
+
+        try {
+            $coach->update($coachData);
+            return Redirect::route('coaches.index')->with('success', 'Coach updated successfully.');
+        } catch (\Exception $e) {
+            return Redirect::back()->withErrors(['error' => 'Failed to update coach.']);
+        }
     }
 
     /**
@@ -79,7 +93,12 @@ class CoachController extends Controller
     public function destroy(string $id)
     {
         $coach = Coach::findOrFail($id);
-        $coach->delete();
-        return Redirect::route('coaches.index');
+        $this->authorize('delete', $coach);
+
+        try {
+            $coach->delete();
+        } catch (\Exception $e) {
+            return Redirect::back()->withErrors(['error' => 'Failed to delete coach.']);
+        }
     }
 }

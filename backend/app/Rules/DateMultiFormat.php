@@ -8,7 +8,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 class DateMultiFormat implements ValidationRule
 {
 
-    private $dateFormats;
+    private array $dateFormats;
 
     public function __construct($dateFormats)
     {

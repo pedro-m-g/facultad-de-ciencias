@@ -49,7 +49,12 @@ class ResetAccount extends Command
             return;
         }
 
-        $user = User::whereEmail($email)->firstOrFail();
+        $user = User::whereEmail($email)->first();
+        if (!$user) {
+            $this->error('User with email ' . $email . ' not found.');
+            return;
+        }
+
         $user->update([
             'password' => Hash::make($password)
         ]);

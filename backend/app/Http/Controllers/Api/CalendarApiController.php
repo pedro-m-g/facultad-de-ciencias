@@ -10,11 +10,15 @@ class CalendarApiController extends Controller
 
     public function getCalendar()
     {
-        return CalendarActivity::all();
+        return response()->json([
+            'data' => CalendarActivity::paginate(),
+            'status' => 'success'
+        ]);
     }
 
-    public function getActivity($id)
+    public function getActivity(int $id)
     {
+        $this->authorize('view', CalendarActivity::class);
         return CalendarActivity::findOrFail($id);
     }
 }

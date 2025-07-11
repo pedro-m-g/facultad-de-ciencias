@@ -14,4 +14,12 @@ class NewsArticle extends Model
         'content',
         'published_at'
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'published_at' => 'datetime',
+        ];
+    }
+
 }

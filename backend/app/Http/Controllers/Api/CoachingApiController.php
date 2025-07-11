@@ -10,11 +10,15 @@ class CoachingApiController extends Controller
 
     public function getCoaches()
     {
-        return Coach::paginate();
+        return response()->json([
+            'data' => Coach::paginate(),
+            'status' => 'success'
+        ]);
     }
 
-    public function getCoach($id)
+    public function getCoach(int $id)
     {
+        $this->authorize('view', Coach::class);
         return Coach::findOrFail($id);
     }
 }

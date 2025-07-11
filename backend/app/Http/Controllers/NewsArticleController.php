@@ -16,7 +16,9 @@ class NewsArticleController extends Controller
      */
     public function index()
     {
-        $articles = NewsArticle::paginate();
+        $this->authorize('viewAny', NewsArticle::class);
+
+        $articles = NewsArticle::where('published_at', '<=', now())->paginate();
         return Inertia::render('News/Index', [
             'articles' => $articles
         ]);
@@ -46,11 +48,15 @@ class NewsArticleController extends Controller
     public function show(string $id)
     {
         $article = NewsArticle::findOrFail($id);
-        $html = Str::markdown($article->content);
+        $html = strip_tags(
+            Str::markdown($article->content),
+            '<p><br><strong><em><ul><ol><li><h1><h2><h3><h4><h5><h6><a><blockquote><code><pre>');
+
         return Inertia::render('News/Show', [
             'id' => $article->id,
             'title' => $article->title,
-            'content' => $html
+            'content' => $html,
+            'published_at' => $article->published_at
         ]);
     }
 

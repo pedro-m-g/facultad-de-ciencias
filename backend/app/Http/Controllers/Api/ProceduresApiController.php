@@ -10,11 +10,16 @@ class ProceduresApiController extends Controller
 
     public function getProcedures()
     {
-        return Procedure::paginate();
+        $this->authorize('viewAny', Procedure::class);
+        return response()->json([
+            'data' => Procedure::paginate(),
+            'status' => 'success'
+        ]);
     }
 
-    public function getProcedure($id)
+    public function getProcedure(int $id)
     {
+        $this->authorize('view', Procedure::class);
         return Procedure::findOrFail($id);
     }
 }

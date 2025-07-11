@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCalendarActivityRequest;
 use App\Models\CalendarActivity;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -15,7 +16,7 @@ class ActivitiesCalendarController extends Controller
      */
     public function index()
     {
-        $activities = CalendarActivity::all();
+        $activities = CalendarActivity::paginate();
         return Inertia::render('Calendar/Index', [
             'activities' => $activities
         ]);
@@ -26,22 +27,16 @@ class ActivitiesCalendarController extends Controller
      */
     public function create(Request $request)
     {
-        $startDate = $request->input(
-            'startDate',
-            date('Y-m-d H:i:s')
-        );
-        $endDate = $request->input(
-            'endDate',
-            date('Y-m-d H:i:s')
-        );
+        $startDate = $request->input('startDate', Carbon::now()->format('Y-m-d H:i:s'));
+        $endDate = $request->input('endDate', Carbon::now()->format('Y-m-d H:i:s'));
         $isAllDay = $request->input('isAllDay', true);
 
         $activity = CalendarActivity::make([
             'title' => '',
-            'start_date' => date('Y-m-d', strtotime($startDate)),
-            'start_time' => date('H:i:s', strtotime($startDate)),
-            'end_date' => date('Y-m-d', strtotime($endDate)),
-            'end_time' => date('H:i:s', strtotime($endDate)),
+            'start_date' => Carbon::parse($startDate)->format('Y-m-d'),
+            'start_time' => Carbon::parse($startDate)->format('H:i:s'),
+            'end_date' => Carbon::parse($endDate)->format('Y-m-d'),
+            'end_time' => Carbon::parse($endDate)->format('H:i:s'),
             'is_all_day' => $isAllDay
         ]);
 

@@ -48,7 +48,10 @@ class CreateAccount extends Command
         ]);
 
         if ($validator->fails()) {
-            $this->error($validator->errors()->first());
+            $this->error('Validation failed:');
+            foreach ($validator->errors()->all() as $error) {
+                $this->error(' - ' . $error);
+            }
             return;
         }
 

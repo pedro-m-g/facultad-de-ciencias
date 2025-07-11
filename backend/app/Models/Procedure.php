@@ -14,7 +14,7 @@ class Procedure extends Model
         'steps'
     ];
 
-    protected function casts()
+    protected function casts(): array
     {
         return [
             'steps' => 'array'

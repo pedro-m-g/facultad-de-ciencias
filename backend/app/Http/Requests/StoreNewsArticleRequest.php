@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\NewsArticle;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreNewsArticleRequest extends FormRequest
@@ -11,7 +12,8 @@ class StoreNewsArticleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        // TODO: Add NewsArticle policy
+        return $this->user()->can('create', NewsArticle::class);
     }
 
     /**

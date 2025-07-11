@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Procedure;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreProcedureRequest extends FormRequest
@@ -11,7 +12,8 @@ class StoreProcedureRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        // TODO: Add Procedure policy
+        return $this->user()->can('create', Procedure::class);
     }
 
     /**

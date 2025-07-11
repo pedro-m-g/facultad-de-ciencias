@@ -13,8 +13,11 @@ class NewsApiController extends Controller
         return NewsArticle::paginate();
     }
 
-    public function getArticle($id)
+    public function getArticle(int $id)
     {
+        $this->validate([
+            'id' => 'required|integer|min:1',
+        ]);
         return NewsArticle::findOrFail($id);
     }
 }

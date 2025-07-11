@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\DateMultiFormat;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCalendarActivityRequest extends FormRequest
@@ -24,9 +25,9 @@ class StoreCalendarActivityRequest extends FormRequest
         return [
             'title' => 'required|max:255',
             'start_date' => 'required|date',
-            'start_time' => 'required_unless:is_all_day,true|date_format:H:i:s',
-            'end_date' => 'required|date',
-            'end_time' => 'required_unless:is_all_day,true|date_format:H:i:s',
+            'start_time' => ['required_unless:is_all_day,true', new DateMultiFormat(['H:i:s', 'H:i'])],
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'end_time' => ['required_unless:is_all_day,true', new DateMultiFormat(['H:i:s', 'H:i'])],
             'is_all_day' => 'required|boolean'
         ];
     }

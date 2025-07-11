@@ -22,64 +22,34 @@ class StoreCoachRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'school_id' => 'required|max:255',
+        $baseRules = [
+            'school_id' => 'required|string|exists:schools,id',
             'name' => 'required|max:255',
-            'description' => 'required|max:255',
-            'is_available_monday' => 'required|boolean',
-            'is_available_tuesday' => 'required|boolean',
-            'is_available_wednesday' => 'required|boolean',
-            'is_available_thursday' => 'required|boolean',
-            'is_available_friday' => 'required|boolean',
-            'is_available_saturday' => 'required|boolean',
-            'monday_start_time' => [
-                'required_if_accepted:is_available_monday',
-                new DateMultiFormat(['H:i', 'H:i:s'])
-            ],
-            'monday_end_time' => [
-                'required_if_accepted:is_available_monday',
-                new DateMultiFormat(['H:i', 'H:i:s'])
-            ],
-            'tuesday_start_time' => [
-                'required_if_accepted:is_available_tuesday',
-                new DateMultiFormat(['H:i', 'H:i:s'])
-            ],
-            'tuesday_end_time' => [
-                'required_if_accepted:is_available_tuesday',
-                new DateMultiFormat(['H:i', 'H:i:s'])
-            ],
-            'wednesday_start_time' => [
-                'required_if_accepted:is_available_wednesday',
-                new DateMultiFormat(['H:i', 'H:i:s'])
-            ],
-            'wednesday_end_time' => [
-                'required_if_accepted:is_available_wednesday',
-                new DateMultiFormat(['H:i', 'H:i:s'])
-            ],
-            'thursday_start_time' => [
-                'required_if_accepted:is_available_thursday',
-                new DateMultiFormat(['H:i', 'H:i:s'])
-            ],
-            'thursday_end_time' => [
-                'required_if_accepted:is_available_thursday',
-                new DateMultiFormat(['H:i', 'H:i:s'])
-            ],
-            'friday_start_time' => [
-                'required_if_accepted:is_available_friday',
-                new DateMultiFormat(['H:i', 'H:i:s'])
-            ],
-            'friday_end_time' => [
-                'required_if_accepted:is_available_friday',
-                new DateMultiFormat(['H:i', 'H:i:s'])
-            ],
-            'saturday_start_time' => [
-                'required_if_accepted:is_available_saturday',
-                new DateMultiFormat(['H:i', 'H:i:s'])
-            ],
-            'saturday_end_time' => [
-                'required_if_accepted:is_available_saturday',
-                new DateMultiFormat(['H:i', 'H:i:s'])
-            ]
+            'description' => 'required|string'
         ];
+
+        $availabilityRules = [];
+        $days = [
+            'monday',
+            'tuesday',
+            'wednesday',
+            'thursday',
+            'friday',
+            'saturday'
+        ];
+
+        foreach ($days as $day) {
+            $availabilityRules["is_available_{$day}"] = 'required|boolean';
+            $availabilityRules["{$day}_start_time"] = [
+                "required_if_accepted:is_available_{$day}",
+                new DateMultiFormat(['H:i', 'H:i:s'])
+            ];
+            $availabilityRules["{$day}_end_time"] = [
+                "required_if_accepted:is_available_{$day}",
+                new DateMultiFormat(['H:i', 'H:i:s'])
+            ];
+        }
+
+        return array_merge($baseRules, $availabilityRules);
     }
 }
