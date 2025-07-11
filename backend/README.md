@@ -17,6 +17,8 @@ módulos:
 
 ```sh
 npm install
+cp .env.example .env
+php artisan key:generate
 composer install
 php artisan migrate
 php artisan account:create
@@ -24,16 +26,11 @@ php artisan account:create
 
 # Ejecución
 
-Iniciar servidor de backend
-
 ```sh
+# Backend
 php artisan serve
-```
-
-Iniciar servidor de frontend (en una terminal separada)
-
-```sh
-npm run dev
+# Front-end (separate shell)
+npm run dev  
 ```
 
 # Documentación
