@@ -1,0 +1,15 @@
+name: issues
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  issues: write
+
+jobs:
+  help-wanted:
+    uses: laravel/.github/.github/workflows/issues.yml@main
+    concurrency:
+      group: issues-${{ github.event.issue.number }}
+      cancel-in-progress: true
