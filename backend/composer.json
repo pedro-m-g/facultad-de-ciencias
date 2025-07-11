@@ -50,7 +50,6 @@
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi || echo 'Skipping migrations – configure your DB and run them manually.'"
         ]
-    }
     },
     "extra": {
         "laravel": {
