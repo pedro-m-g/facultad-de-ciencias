@@ -12,7 +12,6 @@ class StoreProcedureRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // TODO: Add Procedure policy
         return $this->user()->can('create', Procedure::class);
     }
 

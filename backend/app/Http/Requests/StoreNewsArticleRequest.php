@@ -12,7 +12,6 @@ class StoreNewsArticleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // TODO: Add NewsArticle policy
         return $this->user()->can('create', NewsArticle::class);
     }
 
