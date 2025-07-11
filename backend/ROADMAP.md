@@ -5,4 +5,4 @@
 - [ ] Add type hints.
 - [ ] Use automatic model binding in controllers to simplify validation logic.
 - [ ] Improve error handling in controllers.
-- [ ] Enforce upper limits in validations
+- [ ] Enforce upper limits in validations.
