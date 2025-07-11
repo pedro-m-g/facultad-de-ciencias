@@ -13,8 +13,7 @@ módulos:
 -   [ ] Proyectos de Investigación
 -   [ ] Proyectos Cimarrones
 
-# Instalación
-
+## Instalación
 
 # Ejecución
 
