@@ -16,11 +16,26 @@ export default defineConfig({
         port: Number(process.env.VITE_PORT) || 5173,
     },
     resolve: {
-        alias: [
-            {
-                find: '@',
-                replacement: fileURLToPath(new URL('./resources/js', import.meta.url))
-            }
-        ]
+// At the top of backend/vite.config.js
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+export default defineConfig({
+  plugins: [
+    // …
+  ],
+  resolve: {
+    alias: [
+      {
+        find: '@',
+        replacement: resolve(__dirname, 'resources/js'),
+      }
+    ]
+  }
+});
     }
 });
