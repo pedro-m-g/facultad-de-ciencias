@@ -11,6 +11,9 @@ export default defineConfig({
         }),
         react(),
     ],
+    server: {
+        port: Number(process.env.VITE_PORT) || 5173,
+    },
     resolve: {
         alias: [
             {
