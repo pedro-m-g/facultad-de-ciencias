@@ -3,7 +3,7 @@ name: Tests
 on:
   push:
     branches:
-      - master
+      - main
       - '*.x'
   pull_request:
   schedule:
@@ -35,7 +35,9 @@ jobs:
           coverage: none
 
       - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-interaction --no-progress
+        uses: ramsey/composer-install@v3
+        with:
+          composer-options: --no-progress --prefer-dist
 
       - name: Copy environment file
         run: cp .env.example .env
