@@ -13,5 +13,5 @@
 - [ ] Set `SESSION_SECURE_COOKIE` to `true` in production.
 - [ ] Make `filesystems.throw` configurable, defaulting to `false` locally.
 - [ ] Be explicit about the default value of `DB_QUEUE_CONNECTION`.
-- [ ] Replace the MariaDB driver with MySQL.
+- [ ] Replace MariaDB driver with MySQL.
 - [ ] Replace `handlerWith->connectionString` with `useSSL=true` in the logging configuration.
