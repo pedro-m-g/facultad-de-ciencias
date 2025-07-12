@@ -11,7 +11,7 @@
 - [ ] Trim values in `APP_PREVIOUS_KEYS`.
 - [ ] Remove `MAIL_URL` from the configuration.
 - [ ] Set `SESSION_SECURE_COOKIE` to `true` in production.
-- [ ] Make `filesystem->throw` configurable, defaulting to `false` locally.
+- [ ] Make `filesystems.throw` configurable, defaulting to `false` locally.
 - [ ] Be explicit about the default value of `DB_QUEUE_CONNECTION`.
 - [ ] Replace the MariaDB driver with MySQL.
 - [ ] Replace `handlerWith->connectionString` with `useSSL=true` in the logging configuration.
