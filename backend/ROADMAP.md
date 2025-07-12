@@ -14,4 +14,4 @@
 - [ ] Make `filesystems.throw` configurable, defaulting to `false` locally.
 - [ ] Be explicit about the default value of `DB_QUEUE_CONNECTION`.
 - [ ] Replace MariaDB driver with MySQL.
-- [ ] Replace `handlerWith->connectionString` with `useSSL=true` in the logging configuration.
+- [ ] Replace `handlerWith.connectionString` with `useSSL=true` in the logging configuration.
