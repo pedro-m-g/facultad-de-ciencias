@@ -7,9 +7,9 @@
 - [ ] Improve error handling in controllers.
 - [ ] Enforce upper limits in validations.
 - [ ] Remove non-database operations from transactions.
-- [ ] Set MAINTENANCE_STORE config to null.
-- [ ] Trim values in APP_PREVIOUS_KEYS.
-- [ ] Remove MAIL_URL from config.
+- [ ] Set `MAINTENANCE_STORE` to `null`.
+- [ ] Trim values in `APP_PREVIOUS_KEYS`.
+- [ ] Remove `MAIL_URL` from the configuration.
 - [ ] Set SESSION_SECURE_COOKIE to true on production.
 - [ ] Set filesystem->throw configurable, defaulting to false locally.
 - [ ] Be explicit on DB_QUEUE_CONNECTION default value.
