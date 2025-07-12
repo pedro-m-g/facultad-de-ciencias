@@ -15,3 +15,4 @@
 - [ ] Be explicit about the default value of `DB_QUEUE_CONNECTION`.
 - [ ] Replace MariaDB driver with MySQL.
 - [ ] Replace `handlerWith.connectionString` with `useSSL=true` in the logging configuration.
+- [ ] Add valid translations to Spanish (Check laravel-lang/es for an official translation).
